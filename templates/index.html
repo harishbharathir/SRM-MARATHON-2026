@@ -57,9 +57,16 @@
     /* Hero Banner */
     .hero {
       position: relative;
-      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 52%, var(--navy-800) 100%);
+      background-color: var(--navy-950);
+      background-image:
+        radial-gradient(ellipse at center, rgba(6, 16, 41, 0.80) 0%, rgba(6, 16, 41, 0.62) 62%, rgba(6, 16, 41, 0.86) 100%),
+        linear-gradient(180deg, rgba(6, 16, 41, 0.62) 0%, rgba(11, 25, 61, 0.64) 55%, rgba(6, 16, 41, 0.90) 100%),
+        url("/static/images/hero-banner.jpg");
+      background-position: center center, center center, center top;
+      background-size: cover, cover, min(100%, 960px) auto;
+      background-repeat: no-repeat;
       color: var(--white);
-      padding: 40px 20px 88px;
+      padding: 44px 20px 88px;
       text-align: center;
       overflow: hidden;
     }
@@ -69,15 +76,9 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 15% 25%, rgba(255, 90, 31, 0.22) 0%, transparent 45%),
-        radial-gradient(circle at 85% 20%, rgba(255, 184, 0, 0.16) 0%, transparent 40%),
-        repeating-linear-gradient(
-          -25deg,
-          rgba(255, 255, 255, 0.02) 0px,
-          rgba(255, 255, 255, 0.02) 2px,
-          transparent 2px,
-          transparent 18px
-        );
+        linear-gradient(90deg, var(--navy-950) 0%, transparent 18%, transparent 82%, var(--navy-950) 100%),
+        radial-gradient(circle at 20% 25%, rgba(255, 90, 31, 0.16) 0%, transparent 45%),
+        radial-gradient(circle at 80% 25%, rgba(255, 184, 0, 0.14) 0%, transparent 40%);
       pointer-events: none;
     }
 
@@ -95,19 +96,23 @@
       position: relative;
       z-index: 1;
       max-width: 780px;
+      width: 100%;
+      min-width: 0;
       margin: 0 auto;
     }
 
     .brand-row {
       display: inline-flex;
       align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.09);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      gap: 10px;
+      max-width: 100%;
+      background: rgba(6, 16, 41, 0.55);
+      border: 1px solid rgba(255, 255, 255, 0.24);
       padding: 8px 18px 8px 12px;
       border-radius: 999px;
       margin-bottom: 18px;
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
 
     .brand-badge {
@@ -144,10 +149,12 @@
     .hero-meta {
       display: inline-flex;
       flex-wrap: wrap;
+      align-items: center;
       justify-content: center;
-      gap: 10px 20px;
+      gap: 8px 18px;
+      max-width: 100%;
       font-size: 15px;
-      color: rgba(255, 255, 255, 0.88);
+      color: rgba(255, 255, 255, 0.90);
       font-weight: 500;
     }
 
@@ -166,6 +173,7 @@
 
     /* Main Container */
     .container {
+      width: 100%;
       max-width: 980px;
       margin: -52px auto 60px;
       padding: 0 18px;
@@ -205,6 +213,7 @@
 
     .input-wrap {
       flex: 1;
+      min-width: 0;
       display: flex;
       align-items: center;
       background: var(--slate-100);
@@ -221,6 +230,7 @@
     }
 
     .prefix-code {
+      flex-shrink: 0;
       font-size: 0.95rem;
       font-weight: 700;
       color: var(--slate-600);
@@ -231,6 +241,8 @@
     }
 
     #phoneInput {
+      flex: 1;
+      min-width: 0;
       width: 100%;
       border: none;
       background: transparent;
@@ -733,7 +745,23 @@
 
     @media (max-width: 640px) {
       .hero {
-        padding: 32px 16px 76px;
+        padding: 32px 14px 76px;
+        background-size: cover, cover, cover;
+        background-position: center center, center center, center center;
+      }
+      .brand-row {
+        padding: 6px 12px 6px 8px;
+      }
+      .brand-text {
+        font-size: 10.5px;
+        letter-spacing: 0.08em;
+      }
+      .hero-meta {
+        font-size: 13.5px;
+        gap: 6px 12px;
+      }
+      .hero-meta-dot {
+        display: none;
       }
       .search-card {
         padding: 22px 18px;
