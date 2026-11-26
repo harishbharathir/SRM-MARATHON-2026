@@ -1,0 +1,26 @@
+# Python / Local environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.env
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Local standalone build (deployed app runs via Flask + templates/index.html)
+/index.html
+
+# Unused draft spreadsheets and PDF exports (keep only SRM RUN 6.0 FINAL 1.xlsx)
+*DUPLICATE*
+*SAMPLE*
+*CLEANED*
+SRM RUN 6.0 FINAL.xlsx
+*Faculty_Series*
+!app.py
+!render.yaml
+!Procfile
+!requirements.txt
+!SRM RUN 6.0 FINAL 1.xlsx

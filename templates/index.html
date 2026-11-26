@@ -1,0 +1,2167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TSRM Run 2026 — Official Participant Ticket Portal</title>
+  <style>
+    :root {
+      --navy-950: #061029;
+      --navy-900: #0b193d;
+      --navy-800: #152b63;
+      --navy-700: #1e3d8a;
+      --orange-600: #ea4b10;
+      --orange-500: #ff5a1f;
+      --orange-100: #ffedd5;
+      --orange-50: #fff7ed;
+      --gold-400: #ffb800;
+      --gold-300: #ffd166;
+      --emerald-700: #15803d;
+      --emerald-100: #dcfce7;
+      --amber-700: #b45309;
+      --amber-100: #fef3c7;
+      --red-700: #b91c1c;
+      --red-50: #fef2f2;
+      --slate-900: #0f172a;
+      --slate-700: #334155;
+      --slate-600: #475569;
+      --slate-500: #64748b;
+      --slate-300: #cbd5e1;
+      --slate-200: #e2e8f0;
+      --slate-100: #f1f5f9;
+      --bg-page: #f4f7fb;
+      --white: #ffffff;
+      --shadow-sm: 0 2px 8px rgba(11, 25, 61, 0.06);
+      --shadow-md: 0 12px 32px rgba(11, 25, 61, 0.10);
+      --shadow-lg: 0 24px 48px rgba(11, 25, 61, 0.14);
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg-page);
+      color: var(--slate-900);
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Hero Banner */
+    .hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--navy-950) 0%, var(--navy-900) 52%, var(--navy-800) 100%);
+      color: var(--white);
+      padding: 40px 20px 88px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 15% 25%, rgba(255, 90, 31, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 85% 20%, rgba(255, 184, 0, 0.16) 0%, transparent 40%),
+        repeating-linear-gradient(
+          -25deg,
+          rgba(255, 255, 255, 0.02) 0px,
+          rgba(255, 255, 255, 0.02) 2px,
+          transparent 2px,
+          transparent 18px
+        );
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--orange-500), var(--gold-400), var(--orange-500));
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .brand-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: 8px 18px 8px 12px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      backdrop-filter: blur(8px);
+    }
+
+    .brand-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange-500), var(--gold-400));
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(255, 90, 31, 0.4);
+    }
+
+    .brand-text {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold-300);
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.1rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      color: var(--orange-500);
+    }
+
+    .hero-meta {
+      display: inline-flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px 20px;
+      font-size: 15px;
+      color: rgba(255, 255, 255, 0.88);
+      font-weight: 500;
+    }
+
+    .hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold-400);
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 980px;
+      margin: -52px auto 60px;
+      padding: 0 18px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Search Card (Only visible element initially) */
+    .search-card {
+      max-width: 620px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--slate-200);
+      padding: 28px 28px 26px;
+    }
+
+    .search-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--navy-900);
+      margin-bottom: 6px;
+    }
+
+    .search-desc {
+      font-size: 0.94rem;
+      color: var(--slate-600);
+      margin-bottom: 20px;
+    }
+
+    .search-form {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .input-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      background: var(--slate-100);
+      border: 2px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 4px 10px 4px 14px;
+      transition: border-color 0.2s, background-color 0.2s, box-shadow 0.2s;
+    }
+
+    .input-wrap:focus-within {
+      background: var(--white);
+      border-color: var(--navy-700);
+      box-shadow: 0 0 0 4px rgba(30, 61, 138, 0.12);
+    }
+
+    .prefix-code {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--slate-600);
+      padding-right: 10px;
+      margin-right: 10px;
+      border-right: 1.5px solid var(--slate-300);
+      user-select: none;
+    }
+
+    #phoneInput {
+      width: 100%;
+      border: none;
+      background: transparent;
+      outline: none;
+      font-size: 1.08rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--slate-900);
+      padding: 10px 4px;
+      font-family: inherit;
+    }
+
+    #phoneInput::placeholder {
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: normal;
+    }
+
+    .clear-btn {
+      display: none;
+      border: none;
+      background: #e2e8f0;
+      color: var(--slate-700);
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 1;
+      place-items: center;
+      flex-shrink: 0;
+      transition: background 0.15s;
+    }
+
+    .clear-btn:hover {
+      background: #cbd5e1;
+    }
+
+    .clear-btn.visible {
+      display: grid;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: none;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--orange-500), var(--orange-600));
+      color: var(--white);
+      font-family: inherit;
+      font-size: 1rem;
+      font-weight: 700;
+      padding: 13px 24px;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 0 8px 20px rgba(234, 75, 16, 0.28);
+      transition: transform 0.15s, box-shadow 0.15s, filter 0.15s;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(234, 75, 16, 0.35);
+      filter: brightness(1.03);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 2px solid var(--navy-900);
+      border-radius: var(--radius-md);
+      background: var(--white);
+      color: var(--navy-900);
+      font-family: inherit;
+      font-size: 0.96rem;
+      font-weight: 700;
+      padding: 11px 20px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s, transform 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--navy-900);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    .alert-box {
+      display: none;
+      margin-top: 16px;
+      padding: 13px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .alert-box.show {
+      display: flex;
+    }
+
+    .alert-error {
+      background: var(--red-50);
+      color: var(--red-700);
+      border: 1px solid #fecaca;
+    }
+
+    /* Results Area */
+    .results-section {
+      display: none;
+      margin-top: 28px;
+      animation: fadeSlideUp 0.28s ease-out;
+    }
+
+    .results-section.show {
+      display: block;
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Multi-Participant Selector */
+    .multi-picker {
+      display: none;
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .multi-picker.show {
+      display: block;
+    }
+
+    .multi-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .multi-title {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: var(--navy-900);
+    }
+
+    .multi-sub {
+      font-size: 0.9rem;
+      color: var(--slate-600);
+    }
+
+    .multi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .person-choice {
+      text-align: left;
+      background: var(--slate-100);
+      border: 2px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 16px 18px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .person-choice:hover {
+      background: var(--white);
+      border-color: var(--navy-700);
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .person-choice.active {
+      background: #eff6ff;
+      border-color: var(--navy-800);
+      box-shadow: 0 0 0 3px rgba(30, 61, 138, 0.15);
+    }
+
+    .choice-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .choice-bib {
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      background: var(--navy-900);
+      color: var(--white);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .choice-tshirt {
+      font-size: 0.8rem;
+      font-weight: 800;
+      background: var(--orange-100);
+      color: #9a3412;
+      border: 1.5px solid var(--orange-500);
+      padding: 3px 9px;
+      border-radius: 8px;
+    }
+
+    .choice-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+
+    .choice-meta {
+      font-size: 0.85rem;
+      color: var(--slate-600);
+    }
+
+    .choice-cta {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--orange-600);
+      margin-top: 2px;
+    }
+
+    /* Selected Participant View */
+    .ticket-workspace {
+      display: none;
+    }
+
+    .ticket-workspace.show {
+      display: block;
+    }
+
+    .details-card {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .details-head {
+      background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%);
+      border-bottom: 1px solid var(--slate-200);
+      padding: 22px 26px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .runner-name {
+      font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+      font-weight: 800;
+      color: var(--navy-900);
+      margin-bottom: 8px;
+    }
+
+    .badges-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 4px 11px;
+      border-radius: 999px;
+    }
+
+    .pill-confirmed {
+      background: var(--emerald-100);
+      color: var(--emerald-700);
+    }
+
+    .pill-pending {
+      background: var(--amber-100);
+      color: var(--amber-700);
+    }
+
+    .pill-neutral {
+      background: var(--slate-200);
+      color: var(--slate-700);
+    }
+
+    .pill-navy {
+      background: #dbeafe;
+      color: var(--navy-800);
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .bib-callout {
+      background: var(--navy-900);
+      color: var(--white);
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      min-width: 140px;
+    }
+
+    .bib-callout-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-300);
+    }
+
+    .bib-callout-val {
+      font-size: 1.75rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+    }
+
+    .tee-callout {
+      background: linear-gradient(135deg, var(--orange-50), var(--orange-100));
+      border: 2.5px solid var(--orange-500);
+      color: #9a3412;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      text-align: center;
+      min-width: 138px;
+    }
+
+    .tee-callout-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--orange-600);
+    }
+
+    .tee-callout-val {
+      font-size: 1.55rem;
+      font-weight: 900;
+      color: var(--navy-900);
+      line-height: 1.2;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 16px;
+      padding: 24px 26px;
+    }
+
+    .detail-item {
+      background: #f8fafc;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+    }
+
+    .detail-item.span-2 {
+      grid-column: span 2;
+    }
+
+    .detail-label {
+      font-size: 0.73rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--slate-500);
+      margin-bottom: 4px;
+    }
+
+    .detail-value {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--slate-900);
+      word-break: break-word;
+    }
+
+    /* Ticket Preview & Download Panel */
+    .ticket-panel {
+      background: var(--white);
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      padding: 24px 26px 28px;
+    }
+
+    .ticket-actions-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 20px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    .ticket-heading {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--navy-900);
+    }
+
+    .ticket-sub {
+      font-size: 0.88rem;
+      color: var(--slate-600);
+    }
+
+    .download-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .canvas-frame {
+      background: #eef2f7;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #ticketCanvas {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 14px 36px rgba(11, 25, 61, 0.18);
+      background: var(--white);
+    }
+
+    .download-toast {
+      display: none;
+      margin-top: 14px;
+      padding: 11px 16px;
+      border-radius: var(--radius-sm);
+      background: var(--emerald-100);
+      color: var(--emerald-700);
+      border: 1px solid #bbf7d0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .download-toast.show {
+      display: flex;
+    }
+
+    .scanner-note {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: var(--slate-600);
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 32px 16px 76px;
+      }
+      .search-card {
+        padding: 22px 18px;
+      }
+      .search-form {
+        flex-direction: column;
+      }
+      .btn-primary, .btn-secondary {
+        width: 100%;
+      }
+      .download-btns {
+        width: 100%;
+      }
+      .details-head, .details-grid, .ticket-panel {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+      .detail-item.span-2 {
+        grid-column: span 1;
+      }
+      .canvas-frame {
+        padding: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brand-row">
+        <div class="brand-badge" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="15" cy="4.5" r="2"/>
+            <path d="M9 19l2-5 3 2v5"/>
+            <path d="M6.5 12.5l3.5-3 4 1.5 3.5-2.5"/>
+            <path d="M10.5 14l-3.5 3.5"/>
+          </svg>
+        </div>
+        <span class="brand-text">Trichy SRM Run &bull; 6th Edition</span>
+      </div>
+      <h1>TSRM <span>Run</span> 2026</h1>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          27 November 2026
+        </span>
+        <span class="hero-meta-dot" aria-hidden="true"></span>
+        <span class="hero-meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffd166" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Trichy SRM Campus
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="search-card" aria-label="Participant Mobile Lookup">
+      <h2 class="search-title">Find Your Runner Bib &amp; Ticket</h2>
+      <p class="search-desc">Enter your registered mobile number to view your participant details and download your official marathon pass.</p>
+      <form id="searchForm" class="search-form" novalidate>
+        <div class="input-wrap">
+          <span class="prefix-code">+91</span>
+          <input
+            id="phoneInput"
+            type="tel"
+            inputmode="numeric"
+            autocomplete="tel"
+            placeholder="Enter mobile number"
+            maxlength="16"
+            aria-label="Registered Mobile Number"
+          />
+          <button type="button" id="clearBtn" class="clear-btn" aria-label="Clear mobile number">&times;</button>
+        </div>
+        <button type="submit" id="searchBtn" class="btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+          Search
+        </button>
+      </form>
+      <div id="errorBox" class="alert-box alert-error" role="alert"></div>
+    </section>
+
+    <section id="resultsSection" class="results-section" aria-live="polite">
+      <div id="multiPicker" class="multi-picker">
+        <div class="multi-header">
+          <div>
+            <h3 id="multiTitle" class="multi-title"></h3>
+            <p class="multi-sub">Click a participant's name below to view their details and download their ticket as many times as needed.</p>
+          </div>
+        </div>
+        <div id="multiGrid" class="multi-grid"></div>
+      </div>
+
+      <div id="ticketWorkspace" class="ticket-workspace">
+        <article class="details-card">
+          <div class="details-head">
+            <div>
+              <h3 id="detName" class="runner-name"></h3>
+              <div id="detBadges" class="badges-row"></div>
+            </div>
+            <div class="hero-badges">
+              <div class="bib-callout">
+                <div class="bib-callout-label">Bib Number</div>
+                <div id="detBib" class="bib-callout-val"></div>
+              </div>
+              <div class="tee-callout">
+                <div class="tee-callout-label">T-Shirt Size</div>
+                <div id="detTshirt" class="tee-callout-val"></div>
+              </div>
+            </div>
+          </div>
+          <div id="detailsGrid" class="details-grid"></div>
+        </article>
+
+        <section class="ticket-panel">
+          <div class="ticket-actions-bar">
+            <div>
+              <h3 class="ticket-heading">Official Marathon E-Ticket</h3>
+              <p class="ticket-sub">Includes your Bib ID, highlighted T-Shirt size, participant details, and scannable check-in barcode.</p>
+            </div>
+            <div class="download-btns">
+              <button type="button" id="downloadPdfBtn" class="btn-primary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                Download PDF
+              </button>
+              <button type="button" id="downloadImgBtn" class="btn-secondary">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                </svg>
+                Download Image
+              </button>
+            </div>
+          </div>
+
+          <div class="canvas-frame">
+            <canvas id="ticketCanvas" width="2400" height="1260"></canvas>
+          </div>
+
+          <div id="downloadToast" class="download-toast" role="status"></div>
+
+          <p class="scanner-note">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/>
+              <line x1="7" y1="8" x2="7" y2="16"/><line x1="11" y1="8" x2="11" y2="16"/><line x1="15" y1="8" x2="15" y2="16"/><line x1="18" y1="8" x2="18" y2="16"/>
+            </svg>
+            <span id="scannerNoteText"></span>
+          </p>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      "use strict";
+
+      // Participant records live server-side and are fetched per search via /api/search
+
+      // ISO/IEC 15417 Code 128 patterns (indices 0..106)
+      const CODE128_PATTERNS = [
+        "212222","222122","222221","121223","121322","131222","122213","122312","132212","221213",
+        "221312","231212","112232","122132","122231","113222","123122","123221","223211","221132",
+        "221231","213212","223112","312131","311222","321122","321221","312212","322112","322211",
+        "212123","212321","232121","111323","131123","131321","112313","132113","132311","211313",
+        "231113","231311","112133","112331","132131","113123","113321","133121","313121","211331",
+        "231131","213113","213311","213131","311123","311321","331121","312113","312311","332111",
+        "314111","221411","431111","111224","111422","121124","121421","141122","141221","112214",
+        "112412","122114","122411","142112","142211","241211","221114","413111","241112","134111",
+        "111242","121142","121241","114212","124112","124211","411212","421112","421211","212141",
+        "214121","412121","111143","111341","131141","114113","114311","411113","411311","113141",
+        "114131","311141","411131","211412","211214","211232","2331112"
+      ];
+
+      // Encode string using Code 128 Set B -> returns array of { isBar, units } and totalModules
+      function encodeCode128B(text) {
+        const codes = [104]; // Start B
+        let checksum = 104;
+        for (let i = 0; i < text.length; i++) {
+          const ascii = text.charCodeAt(i);
+          if (ascii < 32 || ascii > 127) {
+            throw new Error("Unsupported barcode character: " + text[i]);
+          }
+          const val = ascii - 32;
+          codes.push(val);
+          checksum += (i + 1) * val;
+        }
+        codes.push(checksum % 103);
+        codes.push(106); // Stop
+
+        const runs = [];
+        let totalModules = 0;
+        for (const code of codes) {
+          const pat = CODE128_PATTERNS[code];
+          for (let j = 0; j < pat.length; j++) {
+            const units = Number(pat[j]);
+            runs.push({ isBar: j % 2 === 0, units });
+            totalModules += units;
+          }
+        }
+        return { runs, totalModules };
+      }
+
+      // DOM elements
+      const searchForm = document.getElementById("searchForm");
+      const searchBtn = document.getElementById("searchBtn");
+      const phoneInput = document.getElementById("phoneInput");
+      const clearBtn = document.getElementById("clearBtn");
+      const errorBox = document.getElementById("errorBox");
+      const resultsSection = document.getElementById("resultsSection");
+      const multiPicker = document.getElementById("multiPicker");
+      const multiTitle = document.getElementById("multiTitle");
+      const multiGrid = document.getElementById("multiGrid");
+      const ticketWorkspace = document.getElementById("ticketWorkspace");
+      const detName = document.getElementById("detName");
+      const detBadges = document.getElementById("detBadges");
+      const detBib = document.getElementById("detBib");
+      const detTshirt = document.getElementById("detTshirt");
+      const detailsGrid = document.getElementById("detailsGrid");
+      const ticketCanvas = document.getElementById("ticketCanvas");
+      const downloadPdfBtn = document.getElementById("downloadPdfBtn");
+      const downloadImgBtn = document.getElementById("downloadImgBtn");
+      const downloadToast = document.getElementById("downloadToast");
+      const scannerNoteText = document.getElementById("scannerNoteText");
+
+      let activeParticipant = null;
+      let lastBarcodeGeom = null; // Stores exact canvas coordinates of barcode for crisp vector PDF overlay
+
+      function normalizeInputPhone(raw) {
+        const digits = String(raw || "").replace(/\D/g, "");
+        let ten = digits;
+        if (digits.length === 11 && digits.startsWith("0")) ten = digits.slice(1);
+        else if (digits.length === 12 && digits.startsWith("91")) ten = digits.slice(2);
+        else if (digits.length === 13 && digits.startsWith("091")) ten = digits.slice(3);
+        return { digits, ten };
+      }
+
+      function showError(msg) {
+        errorBox.textContent = msg;
+        errorBox.classList.add("show");
+      }
+
+      function clearError() {
+        errorBox.textContent = "";
+        errorBox.classList.remove("show");
+      }
+
+      function hideToast() {
+        downloadToast.classList.remove("show");
+        downloadToast.textContent = "";
+      }
+
+      function showToast(msg) {
+        downloadToast.textContent = msg;
+        downloadToast.classList.add("show");
+      }
+
+      phoneInput.addEventListener("input", () => {
+        clearBtn.classList.toggle("visible", phoneInput.value.trim().length > 0);
+        clearError();
+      });
+
+      clearBtn.addEventListener("click", () => {
+        phoneInput.value = "";
+        clearBtn.classList.remove("visible");
+        clearError();
+        resultsSection.classList.remove("show");
+        multiPicker.classList.remove("show");
+        ticketWorkspace.classList.remove("show");
+        activeParticipant = null;
+        phoneInput.focus();
+      });
+
+      searchForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        handleSearch();
+      });
+
+      async function handleSearch() {
+        clearError();
+        hideToast();
+
+        const raw = phoneInput.value.trim();
+        const { digits, ten } = normalizeInputPhone(raw);
+
+        if (!digits) {
+          resultsSection.classList.remove("show");
+          showError("Please enter your registered mobile number.");
+          phoneInput.focus();
+          return;
+        }
+
+        if (digits.length < 10) {
+          resultsSection.classList.remove("show");
+          showError("Please enter a valid 10-digit mobile number.");
+          phoneInput.focus();
+          return;
+        }
+
+        const origBtnHtml = searchBtn.innerHTML;
+        searchBtn.disabled = true;
+        searchBtn.textContent = "Searching...";
+
+        try {
+          const resp = await fetch("/api/search", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ phone: raw }),
+          });
+          const data = await resp.json().catch(() => ({}));
+
+          if (!resp.ok || !data.ok) {
+            resultsSection.classList.remove("show");
+            showError(
+              data.error ||
+                "Unable to look up mobile number right now. Please try again."
+            );
+            return;
+          }
+
+          const matches = data.participants || [];
+          const displayPhone = data.query || ten || digits;
+          if (matches.length === 0) {
+            resultsSection.classList.remove("show");
+            showError(
+              "No registration found for mobile number " +
+                displayPhone +
+                ". Please check the number used during registration or contact the TSRM Run helpdesk."
+            );
+            return;
+          }
+
+          resultsSection.classList.add("show");
+
+          if (matches.length === 1) {
+            multiPicker.classList.remove("show");
+            selectParticipant(matches[0]);
+          } else {
+            renderMultiPicker(matches, displayPhone);
+            ticketWorkspace.classList.remove("show");
+            activeParticipant = null;
+            multiPicker.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        } catch (err) {
+          resultsSection.classList.remove("show");
+          showError("Network error while contacting server. Please try again.");
+        } finally {
+          searchBtn.disabled = false;
+          searchBtn.innerHTML = origBtnHtml;
+        }
+      }
+
+      function renderMultiPicker(matches, displayPhone) {
+        multiTitle.textContent =
+          matches.length + " Participants Found for " + displayPhone;
+        multiGrid.innerHTML = "";
+        multiPicker.classList.add("show");
+
+        matches.forEach((p) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "person-choice";
+          btn.dataset.bib = p.bib;
+
+          const top = document.createElement("div");
+          top.className = "choice-top";
+
+          const bibBadge = document.createElement("span");
+          bibBadge.className = "choice-bib";
+          bibBadge.textContent = p.bib;
+
+          const teeBadge = document.createElement("span");
+          teeBadge.className = "choice-tshirt";
+          teeBadge.textContent = "TEE: " + (p.tshirt || "N/A");
+
+          top.appendChild(bibBadge);
+          top.appendChild(teeBadge);
+
+          const nameEl = document.createElement("div");
+          nameEl.className = "choice-name";
+          nameEl.textContent = p.name;
+
+          const metaEl = document.createElement("div");
+          metaEl.className = "choice-meta";
+          metaEl.textContent =
+            (p.dept ? p.dept + " • " : "") + (p.inst || p.group);
+
+          const ctaEl = document.createElement("div");
+          ctaEl.className = "choice-cta";
+          ctaEl.textContent = "Click to View & Download Ticket →";
+
+          btn.appendChild(top);
+          btn.appendChild(nameEl);
+          btn.appendChild(metaEl);
+          btn.appendChild(ctaEl);
+
+          btn.addEventListener("click", () => {
+            document
+              .querySelectorAll(".person-choice")
+              .forEach((el) => el.classList.remove("active"));
+            btn.classList.add("active");
+            selectParticipant(p);
+          });
+
+          multiGrid.appendChild(btn);
+        });
+      }
+
+      function makePill(text, cls) {
+        const span = document.createElement("span");
+        span.className = "pill " + cls;
+        span.textContent = text;
+        return span;
+      }
+
+      function addDetailTile(label, value, span2) {
+        const box = document.createElement("div");
+        box.className = "detail-item" + (span2 ? " span-2" : "");
+        const lbl = document.createElement("div");
+        lbl.className = "detail-label";
+        lbl.textContent = label;
+        const val = document.createElement("div");
+        val.className = "detail-value";
+        val.textContent = value || "—";
+        box.appendChild(lbl);
+        box.appendChild(val);
+        detailsGrid.appendChild(box);
+      }
+
+      function selectParticipant(p) {
+        activeParticipant = p;
+        hideToast();
+
+        detName.textContent = p.name;
+        detBib.textContent = p.bib;
+        detTshirt.textContent = p.tshirt || "—";
+
+        detBadges.innerHTML = "";
+        const isConfirmed = p.status.toLowerCase() === "confirmed";
+        detBadges.appendChild(
+          makePill(
+            p.status || "Confirmed",
+            isConfirmed ? "pill-confirmed" : "pill-pending"
+          )
+        );
+        if (p.pos) detBadges.appendChild(makePill(p.pos, "pill-navy"));
+        if (p.gender) detBadges.appendChild(makePill(p.gender, "pill-neutral"));
+        if (p.group) detBadges.appendChild(makePill(p.group, "pill-neutral"));
+
+        detailsGrid.innerHTML = "";
+        addDetailTile("Bib Series", p.series, false);
+        addDetailTile("Department", p.dept || "—", false);
+        addDetailTile("Institution / Unit", p.inst || "—", true);
+        addDetailTile("Studying Year / Designation", p.year || "—", false);
+        addDetailTile(
+          "Age & DOB",
+          (p.age ? p.age + " Yrs" : "—") + (p.dob ? "  (" + p.dob + ")" : ""),
+          false
+        );
+        addDetailTile("Blood Group", p.blood || "—", false);
+        addDetailTile("Mobile Number", p.phone || "—", false);
+        addDetailTile("Emergency Contact", p.er || "—", false);
+        addDetailTile("Transport Needed", p.transport || "Not required", false);
+        addDetailTile("Email Address", p.email || "—", true);
+        addDetailTile(
+          "Booking & Payment",
+          (p.payStatus || "Completed") +
+            (p.bookingId ? " • Ref: " + p.bookingId.slice(0, 12) : ""),
+          false
+        );
+
+        scannerNoteText.textContent =
+          "Present the downloaded PDF or PNG at check-in. Scanning the barcode automatically inputs Bib ID: " +
+          p.bib +
+          ".";
+
+        drawTicketCanvas(p);
+        ticketWorkspace.classList.add("show");
+        ticketWorkspace.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      // Canvas Drawing Helpers
+      function roundRectPath(ctx, x, y, w, h, r) {
+        const raw = typeof r === "number" ? { tl: r, tr: r, br: r, bl: r } : r;
+        let tl = Math.max(0, raw.tl || 0);
+        let tr = Math.max(0, raw.tr || 0);
+        let br = Math.max(0, raw.br || 0);
+        let bl = Math.max(0, raw.bl || 0);
+        const s = Math.min(
+          1,
+          w / Math.max(1, tl + tr),
+          w / Math.max(1, bl + br),
+          h / Math.max(1, tl + bl),
+          h / Math.max(1, tr + br)
+        );
+        tl *= s;
+        tr *= s;
+        br *= s;
+        bl *= s;
+        ctx.beginPath();
+        ctx.moveTo(x + tl, y);
+        ctx.lineTo(x + w - tr, y);
+        ctx.quadraticCurveTo(x + w, y, x + w, y + tr);
+        ctx.lineTo(x + w, y + h - br);
+        ctx.quadraticCurveTo(x + w, y + h, x + w - br, y + h);
+        ctx.lineTo(x + bl, y + h);
+        ctx.quadraticCurveTo(x, y + h, x, y + h - bl);
+        ctx.lineTo(x, y + tl);
+        ctx.quadraticCurveTo(x, y, x + tl, y);
+        ctx.closePath();
+      }
+
+      function fitTextSize(ctx, text, maxWidth, startPx, minPx, weight, family) {
+        let size = startPx;
+        const fam = family || "'Segoe UI', Arial, sans-serif";
+        const wt = weight || "800";
+        while (size > minPx) {
+          ctx.font = wt + " " + size + "px " + fam;
+          if (ctx.measureText(text).width <= maxWidth) break;
+          size -= 2;
+        }
+        ctx.font = wt + " " + size + "px " + fam;
+        return size;
+      }
+
+      function wrapLines(ctx, text, maxWidth, maxLines) {
+        const words = String(text || "—").trim().split(/\s+/).filter(Boolean);
+        if (words.length === 0) return { lines: ["—"], truncated: false };
+        const lines = [];
+        let current = "";
+        let truncated = false;
+        for (let i = 0; i < words.length; i++) {
+          const word = words[i];
+          const test = current ? current + " " + word : word;
+          if (ctx.measureText(test).width <= maxWidth) {
+            current = test;
+          } else {
+            if (!current) {
+              // Single token wider than maxWidth
+              current = word;
+              if (lines.length === maxLines - 1) {
+                lines.push(current);
+                current = "";
+                truncated = i < words.length - 1 || ctx.measureText(lines[lines.length - 1]).width > maxWidth;
+                break;
+              }
+              lines.push(current);
+              current = "";
+            } else if (lines.length < maxLines - 1) {
+              lines.push(current);
+              current = word;
+            } else {
+              lines.push(current);
+              current = "";
+              truncated = true;
+              break;
+            }
+          }
+        }
+        if (current) {
+          lines.push(current);
+        }
+        if (truncated && lines.length > 0) {
+          let last = lines[lines.length - 1];
+          while (last.length > 3 && ctx.measureText(last + "...").width > maxWidth) {
+            last = last.slice(0, -1).trimEnd();
+          }
+          lines[lines.length - 1] = last + "...";
+        } else if (lines.length === 1 && ctx.measureText(lines[0]).width > maxWidth) {
+          let last = lines[0];
+          while (last.length > 3 && ctx.measureText(last + "...").width > maxWidth) {
+            last = last.slice(0, -1).trimEnd();
+          }
+          lines[0] = last + "...";
+          truncated = true;
+        }
+        return { lines, truncated };
+      }
+
+      function drawTshirtIcon(ctx, cx, cy, size, color) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        const s = size / 24;
+        ctx.scale(s, s);
+        ctx.beginPath();
+        ctx.moveTo(-4, -9);
+        ctx.quadraticCurveTo(0, -6.5, 4, -9);
+        ctx.lineTo(10, -6.5);
+        ctx.lineTo(12, -1);
+        ctx.lineTo(8, 1);
+        ctx.lineTo(7, -2);
+        ctx.lineTo(7, 10);
+        ctx.lineTo(-7, 10);
+        ctx.lineTo(-7, -2);
+        ctx.lineTo(-8, 1);
+        ctx.lineTo(-12, -1);
+        ctx.lineTo(-10, -6.5);
+        ctx.closePath();
+        ctx.fillStyle = color;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      function drawRunnerEmblem(ctx, cx, cy, r) {
+        ctx.save();
+        // Outer track rings
+        ctx.strokeStyle = "rgba(255, 209, 102, 0.35)";
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx.stroke();
+
+        const grad = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r);
+        grad.addColorStop(0, "#ff5a1f");
+        grad.addColorStop(1, "#ffb800");
+        ctx.fillStyle = grad;
+        ctx.beginPath();
+        ctx.arc(cx, cy, r - 6, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Stylized runner silhouette
+        ctx.fillStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.arc(cx + 8, cy - 17, 7.5, 0, Math.PI * 2);
+        ctx.fill();
+
+        ctx.strokeStyle = "#ffffff";
+        ctx.lineWidth = 6;
+        ctx.lineCap = "round";
+        ctx.lineJoin = "round";
+        ctx.beginPath();
+        // Torso & legs
+        ctx.moveTo(cx + 4, cy - 7);
+        ctx.lineTo(cx - 4, cy + 7);
+        ctx.lineTo(cx - 17, cy + 20);
+        ctx.moveTo(cx - 4, cy + 7);
+        ctx.lineTo(cx + 12, cy + 12);
+        ctx.lineTo(cx + 16, cy + 25);
+        // Arms
+        ctx.moveTo(cx - 16, cy - 1);
+        ctx.lineTo(cx - 3, cy - 5);
+        ctx.lineTo(cx + 10, cy - 1);
+        ctx.lineTo(cx + 19, cy - 7);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawFieldBox(ctx, x, y, w, h, label, value, options) {
+        const opts = options || {};
+        ctx.save();
+        roundRectPath(ctx, x, y, w, h, 14);
+        ctx.fillStyle = opts.bg || "#f8fafc";
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = opts.border || "#e2e8f0";
+        ctx.stroke();
+
+        ctx.fillStyle = opts.labelColor || "#64748b";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillText(label.toUpperCase(), x + 20, y + 14);
+
+        const maxW = w - 40;
+        const valText = value || "—";
+        if (opts.wrap) {
+          let chosenLines = [];
+          let lineStep = 29;
+          for (const sz of [24, 21, 18]) {
+            ctx.font = "700 " + sz + "px 'Segoe UI', Arial, sans-serif";
+            const res = wrapLines(ctx, valText, maxW, 2);
+            chosenLines = res.lines;
+            lineStep = sz + 5;
+            if (!res.truncated) break;
+          }
+          ctx.fillStyle = opts.valueColor || "#0f172a";
+          let ly = y + 44;
+          for (const line of chosenLines) {
+            ctx.fillText(line, x + 20, ly);
+            ly += lineStep;
+          }
+        } else {
+          fitTextSize(ctx, valText, maxW, opts.startSize || 27, 17, "700");
+          ctx.fillStyle = opts.valueColor || "#0f172a";
+          ctx.fillText(valText, x + 20, y + 46);
+        }
+        ctx.restore();
+      }
+
+      function drawTicketCanvas(p) {
+        const W = ticketCanvas.width;  // 2400
+        const H = ticketCanvas.height; // 1260
+        const ctx = ticketCanvas.getContext("2d");
+
+        ctx.clearRect(0, 0, W, H);
+
+        // Outer white ticket card
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, W, H);
+
+        const SPLIT_X = 1630;
+        const HEADER_H = 182;
+
+        // Right Stub subtle background tint
+        ctx.fillStyle = "#f8fafc";
+        ctx.fillRect(SPLIT_X, HEADER_H, W - SPLIT_X, H - HEADER_H);
+
+        // Subtle athletic concentric track arc watermark in main body
+        ctx.save();
+        ctx.beginPath();
+        ctx.rect(0, HEADER_H, SPLIT_X, H - HEADER_H);
+        ctx.clip();
+        ctx.strokeStyle = "rgba(15, 23, 42, 0.032)";
+        ctx.lineWidth = 22;
+        for (let r = 240; r <= 620; r += 75) {
+          ctx.beginPath();
+          ctx.arc(1460, 1140, r, Math.PI, Math.PI * 1.8);
+          ctx.stroke();
+        }
+        ctx.restore();
+
+        // Top Navy Banner across full width
+        const hdrGrad = ctx.createLinearGradient(0, 0, W, 0);
+        hdrGrad.addColorStop(0, "#07122e");
+        hdrGrad.addColorStop(0.55, "#0e2254");
+        hdrGrad.addColorStop(1, "#163073");
+        ctx.fillStyle = hdrGrad;
+        ctx.fillRect(0, 0, W, HEADER_H);
+
+        // Subtle speed stripes inside header
+        ctx.save();
+        ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+        for (let sx = 980; sx < 1680; sx += 70) {
+          ctx.beginPath();
+          ctx.moveTo(sx, 0);
+          ctx.lineTo(sx + 34, 0);
+          ctx.lineTo(sx - 46, HEADER_H);
+          ctx.lineTo(sx - 80, HEADER_H);
+          ctx.closePath();
+          ctx.fill();
+        }
+        ctx.restore();
+
+        // Orange & Gold accent stripe under header
+        const barGrad = ctx.createLinearGradient(0, 0, W, 0);
+        barGrad.addColorStop(0, "#ff5a1f");
+        barGrad.addColorStop(0.5, "#ffb800");
+        barGrad.addColorStop(1, "#ff5a1f");
+        ctx.fillStyle = barGrad;
+        ctx.fillRect(0, HEADER_H - 9, W, 9);
+
+        // Header Emblem + Title
+        drawRunnerEmblem(ctx, 108, 88, 50);
+
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillStyle = "#ffd166";
+        ctx.font = "700 20px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("TRICHY SRM RUN  •  6TH EDITION  •  OFFICIAL PARTICIPANT PASS", 184, 38);
+
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "900 56px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("TSRM RUN 2026", 184, 68);
+
+        // Date & Venue Pill in Left Header
+        roundRectPath(ctx, 1140, 38, 430, 100, 16);
+        ctx.fillStyle = "rgba(255, 255, 255, 0.11)";
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(255, 209, 102, 0.45)";
+        ctx.stroke();
+
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffd166";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("EVENT DATE & VENUE", 1355, 52);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "800 30px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("27 NOV 2026  •  TRICHY SRM", 1355, 84);
+
+        // Right Stub Header Content
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffd166";
+        ctx.font = "800 20px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("OFFICIAL CHECK-IN STUB", SPLIT_X + (W - SPLIT_X) / 2, 46);
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "800 34px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("TSRM RUN 2026", SPLIT_X + (W - SPLIT_X) / 2, 82);
+
+        // ================= LEFT MAIN BODY =================
+        const LX = 60;
+
+        // 1. BIG BIB NUMBER CARD
+        const bibW = 910;
+        const bibH = 248;
+        const bibY = 216;
+
+        roundRectPath(ctx, LX, bibY, bibW, bibH, 20);
+        const bibGrad = ctx.createLinearGradient(LX, bibY, LX + bibW, bibY + bibH);
+        bibGrad.addColorStop(0, "#eef4ff");
+        bibGrad.addColorStop(1, "#f8fafc");
+        ctx.fillStyle = bibGrad;
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#1e3d8a";
+        ctx.stroke();
+
+        // Top tag inside Bib card
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        ctx.fillStyle = "#1e3d8a";
+        ctx.font = "800 22px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("OFFICIAL BIB NUMBER", LX + 32, bibY + 22);
+
+        // Series badge top-right inside Bib card
+        const seriesTxt = (p.series || p.group || "PARTICIPANT").toUpperCase();
+        ctx.font = "700 19px 'Segoe UI', Arial, sans-serif";
+        const serW = Math.min(480, ctx.measureText(seriesTxt).width + 36);
+        roundRectPath(ctx, LX + bibW - serW - 24, bibY + 18, serW, 38, 10);
+        ctx.fillStyle = "#0b193d";
+        ctx.fill();
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffd166";
+        fitTextSize(ctx, seriesTxt, serW - 20, 18, 13, "700");
+        ctx.fillText(seriesTxt, LX + bibW - serW / 2 - 24, bibY + 27);
+
+        // HUGE BIB ID
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#061029";
+        fitTextSize(ctx, p.bib, bibW - 64, 140, 84, "900");
+        ctx.fillText(p.bib, LX + 30, bibY + 62);
+
+        // 2. HIGHLIGHTED T-SHIRT SIZE CARD (Right beside Bib ID)
+        const teeX = LX + bibW + 26;
+        const teeW = SPLIT_X - 60 - teeX; // ~574px
+        const teeH = 248;
+        const teeY = bibY;
+
+        roundRectPath(ctx, teeX, teeY, teeW, teeH, 20);
+        const teeGrad = ctx.createLinearGradient(teeX, teeY, teeX, teeY + teeH);
+        teeGrad.addColorStop(0, "#fff7ed");
+        teeGrad.addColorStop(1, "#ffedd5");
+        ctx.fillStyle = teeGrad;
+        ctx.fill();
+        ctx.lineWidth = 4.5;
+        ctx.strokeStyle = "#ff5a1f";
+        ctx.stroke();
+
+        // Solid vibrant header bar inside T-Shirt card
+        roundRectPath(ctx, teeX, teeY, teeW, 56, { tl: 18, tr: 18, br: 0, bl: 0 });
+        ctx.fillStyle = "#ff5a1f";
+        ctx.fill();
+
+        drawTshirtIcon(ctx, teeX + 42, teeY + 28, 28, "#ffffff");
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "800 22px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("T-SHIRT SIZE  (KIT DESK)", teeX + 68, teeY + 15);
+
+        // Huge Highlighted T-Shirt Size Value
+        const teeVal = (p.tshirt || "N/A").toUpperCase();
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#0b193d";
+        fitTextSize(ctx, teeVal, teeW - 40, 86, 52, "900");
+        ctx.fillText(teeVal, teeX + teeW / 2, teeY + 86);
+
+        ctx.fillStyle = "#9a3412";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("SHOW AT JERSEY COUNTER", teeX + teeW / 2, teeY + 198);
+
+        // 3. PARTICIPANT IDENTITY STRIP
+        const idY = 492;
+        const idW = SPLIT_X - 120;
+        const idH = 126;
+
+        roundRectPath(ctx, LX, idY, idW, idH, 16);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.stroke();
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#64748b";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("PARTICIPANT NAME", LX + 24, idY + 16);
+
+        // Status + Role Badges top-right of Identity strip
+        let bxCursor = LX + idW - 22;
+        const badgeDefs = [];
+        const isConf = p.status.toLowerCase() === "confirmed";
+        badgeDefs.push({
+          text: isConf ? "CONFIRMED" : (p.status || "PENDING").toUpperCase(),
+          bg: isConf ? "#dcfce7" : "#fef3c7",
+          fg: isConf ? "#15803d" : "#b45309",
+        });
+        if (p.gender) badgeDefs.push({ text: p.gender.toUpperCase(), bg: "#f1f5f9", fg: "#334155" });
+        if (p.pos) badgeDefs.push({ text: p.pos.toUpperCase(), bg: "#dbeafe", fg: "#1e3d8a" });
+
+        for (const bd of badgeDefs) {
+          ctx.font = "800 17px 'Segoe UI', Arial, sans-serif";
+          const bw = ctx.measureText(bd.text).width + 28;
+          bxCursor -= bw;
+          roundRectPath(ctx, bxCursor, idY + 14, bw, 32, 999);
+          ctx.fillStyle = bd.bg;
+          ctx.fill();
+          ctx.textAlign = "center";
+          ctx.fillStyle = bd.fg;
+          ctx.fillText(bd.text, bxCursor + bw / 2, idY + 20);
+          bxCursor -= 10;
+        }
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#0f172a";
+        fitTextSize(ctx, p.name, idW - 48, 46, 26, "800");
+        ctx.fillText(p.name, LX + 24, idY + 56);
+
+        // 4. COMPLETE DETAILS GRID (Rows 1, 2, 3)
+        // Row 1: Institution (wide) + Department & Year/Designation
+        const r1Y = 642;
+        const r1H = 122;
+        const col1W = 860;
+        const col2W = idW - col1W - 22;
+        drawFieldBox(ctx, LX, r1Y, col1W, r1H, "Institution / Business Unit", p.inst || "—", { wrap: true });
+        drawFieldBox(
+          ctx,
+          LX + col1W + 22,
+          r1Y,
+          col2W,
+          r1H,
+          "Department & Year / Designation",
+          (p.dept || "—") + (p.year ? "  •  " + p.year : ""),
+          { wrap: true }
+        );
+
+        // Row 2: 4 compact cards (Age & DOB | Blood Group | Mobile | Emergency Contact)
+        const r2Y = 786;
+        const r2H = 110;
+        const gap2 = 20;
+        const w4 = (idW - gap2 * 3) / 4;
+        const ageText = (p.age ? p.age + " Yrs" : "—") + (p.dob ? "  (" + p.dob + ")" : "");
+        drawFieldBox(ctx, LX, r2Y, w4, r2H, "Age & DOB", ageText, { startSize: 23 });
+        drawFieldBox(ctx, LX + (w4 + gap2) * 1, r2Y, w4, r2H, "Blood Group", p.blood || "—", {
+          bg: "#fef2f2",
+          border: "#fecaca",
+          labelColor: "#991b1b",
+          valueColor: "#b91c1c",
+          startSize: 30,
+        });
+        drawFieldBox(ctx, LX + (w4 + gap2) * 2, r2Y, w4, r2H, "Mobile Number", p.phone || "—", { startSize: 27 });
+        drawFieldBox(ctx, LX + (w4 + gap2) * 3, r2Y, w4, r2H, "Emergency Contact", p.er || "—", { startSize: 27 });
+
+        // Row 3: 3 cards (Transport | Email | Booking & Group)
+        const r3Y = 918;
+        const r3H = 110;
+        const wT = 320;
+        const wE = 610;
+        const wB = idW - wT - wE - 40;
+        drawFieldBox(ctx, LX, r3Y, wT, r3H, "Transport Needed", p.transport || "Not required", { startSize: 24 });
+        drawFieldBox(ctx, LX + wT + 20, r3Y, wE, r3H, "Email Address", p.email || "—", { startSize: 24 });
+        drawFieldBox(
+          ctx,
+          LX + wT + 20 + wE + 20,
+          r3Y,
+          wB,
+          r3H,
+          "Group & Ref ID",
+          (p.group || "—") + (p.bookingId ? " • " + p.bookingId.slice(0, 8).toUpperCase() : ""),
+          { startSize: 23 }
+        );
+
+        // Footer Note on Left Body
+        ctx.fillStyle = "#e2e8f0";
+        ctx.fillRect(LX, 1068, idW, 2);
+
+        ctx.textAlign = "left";
+        ctx.fillStyle = "#475569";
+        ctx.font = "600 20px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText(
+          "Event: Trichy SRM Run - 6th Edition  •  Date: 27 November 2026  •  Venue: Trichy SRM Campus",
+          LX,
+          1092
+        );
+        ctx.fillStyle = "#64748b";
+        ctx.font = "600 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText(
+          "Carry this E-Ticket (digital or printed) along with your valid College / Staff ID at the Bib & Kit Collection Desk.",
+          LX,
+          1132
+        );
+
+        // S.No tag bottom-right of main body
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#64748b";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("REG S.NO: " + (p.sno || "—") + "  •  " + (p.payStatus || "Completed").toUpperCase(), LX + idW, 1132);
+
+        // ================= PERFORATED DIVIDER =================
+        ctx.save();
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.lineWidth = 4;
+        ctx.setLineDash([14, 12]);
+        ctx.beginPath();
+        ctx.moveTo(SPLIT_X, HEADER_H + 22);
+        ctx.lineTo(SPLIT_X, H - 22);
+        ctx.stroke();
+        ctx.restore();
+
+        // Top & bottom semi-circle punch notches
+        ctx.fillStyle = "#eef2f7";
+        ctx.beginPath();
+        ctx.arc(SPLIT_X, 0, 26, 0, Math.PI);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(SPLIT_X, H, 26, Math.PI, Math.PI * 2);
+        ctx.fill();
+
+        // ================= RIGHT STUB (BARCODE + CHECK-IN) =================
+        const SX = SPLIT_X + 44;
+        const SW = W - SPLIT_X - 88; // 682px
+        const SCX = SPLIT_X + (W - SPLIT_X) / 2;
+
+        // Stub Event Date Pill
+        const stubPillTxt = "27 NOVEMBER 2026  •  " + (p.group || "SRM");
+        roundRectPath(ctx, SX + 24, 214, SW - 48, 44, 999);
+        ctx.fillStyle = "#0b193d";
+        ctx.fill();
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffd166";
+        fitTextSize(ctx, stubPillTxt, SW - 84, 20, 14, "800");
+        ctx.fillText(stubPillTxt, SCX, 224);
+
+        // Stub BIB ID
+        ctx.fillStyle = "#64748b";
+        ctx.font = "700 20px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("RUNNER BIB ID", SCX, 286);
+
+        ctx.fillStyle = "#061029";
+        fitTextSize(ctx, p.bib, SW - 32, 96, 62, "900");
+        ctx.fillText(p.bib, SCX, 314);
+
+        // Stub Highlighted T-Shirt Badge
+        roundRectPath(ctx, SX + 40, 434, SW - 80, 74, 14);
+        ctx.fillStyle = "#fff7ed";
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#ff5a1f";
+        ctx.stroke();
+        ctx.fillStyle = "#ff5a1f";
+        ctx.font = "800 16px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("T-SHIRT SIZE", SCX, 444);
+        ctx.fillStyle = "#0b193d";
+        ctx.font = "900 32px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText(teeVal, SCX, 468);
+
+        // Stub Participant Summary
+        ctx.fillStyle = "#0f172a";
+        fitTextSize(ctx, p.name, SW - 36, 28, 13, "800");
+        ctx.fillText(p.name, SCX, 536);
+
+        ctx.fillStyle = "#475569";
+        const stubSub =
+          (p.dept || "—") +
+          (p.age ? "  •  " + p.age + " Yrs" : "") +
+          (p.blood ? "  •  " + p.blood : "");
+        fitTextSize(ctx, stubSub, SW - 36, 21, 13, "700");
+        ctx.fillText(stubSub, SCX, 578);
+
+        // PURE WHITE BARCODE CONTAINER
+        const bcBoxX = SX;
+        const bcBoxY = 638;
+        const bcBoxW = SW; // 682px
+        const bcBoxH = 440;
+
+        roundRectPath(ctx, bcBoxX, bcBoxY, bcBoxW, bcBoxH, 18);
+        ctx.fillStyle = "#ffffff";
+        ctx.fill();
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.stroke();
+
+        ctx.fillStyle = "#475569";
+        ctx.font = "800 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("SCAN BARCODE FOR BIB CHECK-IN", SCX, bcBoxY + 24);
+
+        // Generate Code 128B Barcode
+        const encoded = encodeCode128B(p.bib);
+        // Require >= 12x module width quiet zones on left & right
+        const minTotalUnitsWithQuiet = encoded.totalModules + 24;
+        const modW = Math.max(4, Math.floor((bcBoxW - 36) / minTotalUnitsWithQuiet));
+        const barsTotalW = encoded.totalModules * modW;
+        const startX = Math.round(SCX - barsTotalW / 2);
+        const barY = bcBoxY + 72;
+        const barH = 240;
+
+        // Pure white quiet zone background explicitly painted
+        const qzPad = modW * 12;
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(startX - qzPad, barY - 12, barsTotalW + qzPad * 2, barH + 24);
+
+        // Draw crisp black bars on exact integer pixel boundaries
+        ctx.fillStyle = "#000000";
+        let cursorX = startX;
+        const pdfBars = [];
+        for (const run of encoded.runs) {
+          const rw = run.units * modW;
+          if (run.isBar) {
+            ctx.fillRect(cursorX, barY, rw, barH);
+            pdfBars.push({ x: cursorX, y: barY, w: rw, h: barH });
+          }
+          cursorX += rw;
+        }
+
+        lastBarcodeGeom = {
+          quietBox: {
+            x: startX - qzPad,
+            y: barY - 10,
+            w: barsTotalW + qzPad * 2,
+            h: barH + 20,
+          },
+          bars: pdfBars,
+        };
+
+        // Human-readable Bib ID beneath barcode
+        ctx.fillStyle = "#000000";
+        ctx.font = "800 42px 'Consolas', 'Courier New', monospace";
+        ctx.fillText(p.bib, SCX, barY + barH + 30);
+
+        // Bottom Stub Note
+        ctx.fillStyle = "#64748b";
+        ctx.font = "700 18px 'Segoe UI', Arial, sans-serif";
+        ctx.fillText("Official Gate & Kit Verification Stub", SCX, 1118);
+
+        // Outer crisp border around entire ticket
+        ctx.strokeStyle = "#cbd5e1";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(1.5, 1.5, W - 3, H - 3);
+      }
+
+      // Download PNG Image
+      function downloadPng() {
+        if (!activeParticipant) return;
+        const p = activeParticipant;
+        const fileName = "TSRM_Run_2026_" + p.bib + ".png";
+        ticketCanvas.toBlob((blob) => {
+          if (!blob) return;
+          triggerBlobDownload(blob, fileName);
+          showToast("Image ticket downloaded (" + fileName + "). You can download again anytime.");
+        }, "image/png");
+      }
+
+      function triggerBlobDownload(blob, fileName) {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = fileName;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(url), 10000);
+      }
+
+      // Pure-JS Zlib compression helper (uses native CompressionStream('deflate') with RFC 1950 stored-block fallback)
+      function adler32(bytes) {
+        let a = 1;
+        let b = 0;
+        const MOD = 65521;
+        for (let i = 0; i < bytes.length; i++) {
+          a = (a + bytes[i]) % MOD;
+          b = (b + a) % MOD;
+        }
+        return ((b << 16) | a) >>> 0;
+      }
+
+      function zlibStoredFallback(bytes) {
+        const MAX_BLOCK = 65535;
+        const numBlocks = Math.ceil(bytes.length / MAX_BLOCK) || 1;
+        const out = new Uint8Array(2 + numBlocks * 5 + bytes.length + 4);
+        let pos = 0;
+        out[pos++] = 0x78;
+        out[pos++] = 0x01;
+        for (let i = 0; i < numBlocks; i++) {
+          const start = i * MAX_BLOCK;
+          const end = Math.min(start + MAX_BLOCK, bytes.length);
+          const len = end - start;
+          const isFinal = i === numBlocks - 1 ? 1 : 0;
+          out[pos++] = isFinal;
+          out[pos++] = len & 0xff;
+          out[pos++] = (len >>> 8) & 0xff;
+          const nlen = (~len) & 0xffff;
+          out[pos++] = nlen & 0xff;
+          out[pos++] = (nlen >>> 8) & 0xff;
+          out.set(bytes.subarray(start, end), pos);
+          pos += len;
+        }
+        const sum = adler32(bytes);
+        out[pos++] = (sum >>> 24) & 0xff;
+        out[pos++] = (sum >>> 16) & 0xff;
+        out[pos++] = (sum >>> 8) & 0xff;
+        out[pos++] = sum & 0xff;
+        return out;
+      }
+
+      async function compressZlib(bytes) {
+        if (typeof CompressionStream !== "undefined") {
+          try {
+            const cs = new CompressionStream("deflate");
+            const stream = new Blob([bytes]).stream().pipeThrough(cs);
+            const buf = await new Response(stream).arrayBuffer();
+            const arr = new Uint8Array(buf);
+            // Verify RFC 1950 zlib header (CMF byte low nibble = 8 for deflate)
+            if (arr.length > 6 && (arr[0] & 0x0f) === 8) {
+              return arr;
+            }
+          } catch (_) {
+            // Fall through to stored zlib
+          }
+        }
+        return zlibStoredFallback(bytes);
+      }
+
+      function pdfSafeStr(str) {
+        return String(str || "")
+          .replace(/[^\x20-\x7e]/g, " ")
+          .replace(/\\/g, "\\\\")
+          .replace(/\(/g, "\\(")
+          .replace(/\)/g, "\\)");
+      }
+
+      // Generate A4 Landscape PDF with lossless ticket + exact vector Code 128 barcode overlay
+      async function downloadPdf() {
+        if (!activeParticipant) return;
+        const p = activeParticipant;
+        const origLabel = downloadPdfBtn.innerHTML;
+        downloadPdfBtn.disabled = true;
+        downloadPdfBtn.textContent = "Generating PDF...";
+
+        try {
+          const W = ticketCanvas.width;
+          const H = ticketCanvas.height;
+          const ctx = ticketCanvas.getContext("2d");
+          const rgba = ctx.getImageData(0, 0, W, H).data;
+          const rgb = new Uint8Array(W * H * 3);
+          for (let i = 0, j = 0; i < rgba.length; i += 4, j += 3) {
+            rgb[j] = rgba[i];
+            rgb[j + 1] = rgba[i + 1];
+            rgb[j + 2] = rgba[i + 2];
+          }
+          const compressedRgb = await compressZlib(rgb);
+
+          // A4 Landscape dimensions in PDF points
+          const PW = 841.89;
+          const PH = 595.28;
+          const drawX = 24;
+          const drawW = PW - 48; // 793.89
+          const drawH = drawW * (H / W); // 416.79
+          const drawY = (PH - drawH) / 2; // 89.245
+
+          const cmds = [];
+          // Sheet header text
+          cmds.push("0.043 0.098 0.239 rg");
+          cmds.push("BT /F2 11 Tf 24 554 Td (" + pdfSafeStr("TRICHY SRM RUN 2026 (6TH EDITION)  |  27 NOVEMBER 2026  |  OFFICIAL RUNNER PASS") + ") Tj ET");
+          const rightHdrStr = "BIB: " + p.bib + "   |   T-SHIRT: " + (p.tshirt || "N/A");
+          // Right-align against PW - 24 using conservative Helvetica-Bold 11pt width estimate
+          let estW = 0;
+          for (let i = 0; i < rightHdrStr.length; i++) {
+            const ch = rightHdrStr[i];
+            if (ch === " ") estW += 3.1;
+            else if (ch === "|" || ch === ":") estW += 3.7;
+            else if (ch === "M" || ch === "W") estW += 9.2;
+            else if (ch === "I" || ch === "1" || ch === "-") estW += 4.2;
+            else estW += 7.4;
+          }
+          const rightX = Math.max(500, PW - 24 - estW);
+          cmds.push("0.918 0.294 0.063 rg");
+          cmds.push("BT /F2 11 Tf " + rightX.toFixed(1) + " 554 Td (" + pdfSafeStr(rightHdrStr) + ") Tj ET");
+
+          // Ticket image placement
+          cmds.push("q");
+          cmds.push(drawW.toFixed(3) + " 0 0 " + drawH.toFixed(3) + " " + drawX.toFixed(3) + " " + drawY.toFixed(3) + " cm");
+          cmds.push("/Im1 Do");
+          cmds.push("Q");
+
+          // Vector Code 128 barcode overlay for razor-sharp scanning at any print DPI
+          if (lastBarcodeGeom) {
+            const toPdfRect = (rect) => ({
+              x: drawX + (rect.x / W) * drawW,
+              y: drawY + ((H - (rect.y + rect.h)) / H) * drawH,
+              w: (rect.w / W) * drawW,
+              h: (rect.h / H) * drawH,
+            });
+            const qb = toPdfRect(lastBarcodeGeom.quietBox);
+            cmds.push("1 1 1 rg");
+            cmds.push(qb.x.toFixed(3) + " " + qb.y.toFixed(3) + " " + qb.w.toFixed(3) + " " + qb.h.toFixed(3) + " re f");
+
+            cmds.push("0 0 0 rg");
+            for (const bar of lastBarcodeGeom.bars) {
+              const r = toPdfRect(bar);
+              cmds.push(r.x.toFixed(3) + " " + r.y.toFixed(3) + " " + r.w.toFixed(3) + " " + r.h.toFixed(3) + " re f");
+            }
+          }
+
+          // Subtle cut guide frame
+          cmds.push("0.75 w [4 4] 0 d 0.72 0.77 0.84 RG");
+          cmds.push(drawX.toFixed(3) + " " + drawY.toFixed(3) + " " + drawW.toFixed(3) + " " + drawH.toFixed(3) + " re S");
+
+          // Sheet footer text
+          cmds.push("0.35 0.42 0.52 rg");
+          cmds.push(
+            "BT /F1 9.5 Tf 24 44 Td (" +
+              pdfSafeStr(
+                "Participant: " +
+                  p.name +
+                  "  |  Bib ID: " +
+                  p.bib +
+                  "  |  T-Shirt Size: " +
+                  (p.tshirt || "N/A") +
+                  "  |  Present at Trichy SRM Campus Kit Desk on 27 Nov 2026."
+              ) +
+              ") Tj ET"
+          );
+
+          const contentStr = cmds.join("\n");
+          const enc = new TextEncoder();
+          const contentBytes = enc.encode(contentStr);
+
+          // Assemble raw PDF binary cleanly with exact xref byte offsets
+          const parts = [];
+          let byteLen = 0;
+          const offsets = [0]; // obj 0 free
+
+          function pushBytes(u8) {
+            parts.push(u8);
+            byteLen += u8.length;
+          }
+          function pushStr(s) {
+            pushBytes(enc.encode(s));
+          }
+          function beginObj(id) {
+            offsets[id] = byteLen;
+            pushStr(id + " 0 obj\n");
+          }
+          function endObj() {
+            pushStr("\nendobj\n");
+          }
+
+          pushStr("%PDF-1.4\n");
+          pushBytes(new Uint8Array([0x25, 0xE2, 0xE3, 0xCF, 0xD3, 0x0A]));
+
+          beginObj(1);
+          pushStr("<< /Type /Catalog /Pages 2 0 R >>");
+          endObj();
+
+          beginObj(2);
+          pushStr("<< /Type /Pages /Kids [3 0 R] /Count 1 >>");
+          endObj();
+
+          beginObj(3);
+          pushStr(
+            "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 " +
+              PW +
+              " " +
+              PH +
+              "] /Resources << /Font << /F1 4 0 R /F2 5 0 R >> /XObject << /Im1 6 0 R >> >> /Contents 7 0 R >>"
+          );
+          endObj();
+
+          beginObj(4);
+          pushStr("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>");
+          endObj();
+
+          beginObj(5);
+          pushStr("<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>");
+          endObj();
+
+          beginObj(6);
+          pushStr(
+            "<< /Type /XObject /Subtype /Image /Width " +
+              W +
+              " /Height " +
+              H +
+              " /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /FlateDecode /Length " +
+              compressedRgb.length +
+              " >>\nstream\n"
+          );
+          pushBytes(compressedRgb);
+          pushStr("\nendstream");
+          endObj();
+
+          beginObj(7);
+          pushStr("<< /Length " + contentBytes.length + " >>\nstream\n");
+          pushBytes(contentBytes);
+          pushStr("\nendstream");
+          endObj();
+
+          const xrefStart = byteLen;
+          pushStr("xref\n0 " + offsets.length + "\n");
+          pushStr("0000000000 65535 f \n");
+          for (let i = 1; i < offsets.length; i++) {
+            pushStr(String(offsets[i]).padStart(10, "0") + " 00000 n \n");
+          }
+          pushStr(
+            "trailer\n<< /Size " +
+              offsets.length +
+              " /Root 1 0 R >>\nstartxref\n" +
+              xrefStart +
+              "\n%%EOF"
+          );
+
+          const pdfBlob = new Blob(parts, { type: "application/pdf" });
+          const fileName = "TSRM_Run_2026_" + p.bib + ".pdf";
+          triggerBlobDownload(pdfBlob, fileName);
+          showToast("PDF ticket downloaded (" + fileName + "). You can download again anytime.");
+        } finally {
+          downloadPdfBtn.disabled = false;
+          downloadPdfBtn.innerHTML = origLabel;
+        }
+      }
+
+      downloadPdfBtn.addEventListener("click", downloadPdf);
+      downloadImgBtn.addEventListener("click", downloadPng);
+    })();
+  </script>
+</body>
+</html>
